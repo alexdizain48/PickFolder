@@ -20,7 +20,7 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button btn;
+    Button btn, btn1;
     OpenFileDialog fileDialog;
 
     private static final int SDCARD_PERMISSION = 1,
@@ -82,12 +82,12 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        /*findViewById(R.id.btn_file).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.btn1).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                pickFile();
+                pickFiles();
             }
-        });*/
+        });
 
         tvFolder = (TextView) findViewById(R.id.txt1);
 
@@ -97,6 +97,19 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, FolderPicker.class);
         startActivityForResult(intent, FOLDER_PICKER_CODE);
     }
+
+    void pickFiles() {
+        Intent intent = new Intent(this, FolderPicker.class);
+
+        //Optional
+        intent.putExtra("title", "Select file to upload");
+        intent.putExtra("location", Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES).getAbsolutePath());
+        intent.putExtra("pickFiles", true);
+        //Optional
+
+        startActivityForResult(intent, FILE_PICKER_CODE);
+    }
+
 
 
     protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
@@ -111,16 +124,16 @@ public class MainActivity extends AppCompatActivity {
                 tvFolder.setText("Закончен");
             }
 
-        } /*else if (requestCode == FILE_PICKER_CODE) {
+        } else if (requestCode == FILE_PICKER_CODE) {
 
             if (resultCode == Activity.RESULT_OK && intent.hasExtra("data")) {
                 String fileLocation = "<b>Selected File: </b>" + intent.getExtras().getString("data");
                 tvFile.setText(Html.fromHtml(fileLocation));
             } else if (resultCode == Activity.RESULT_CANCELED) {
-                tvFile.setText(R.string.file_pick_cancelled);
+                tvFile.setText("Ok");
             }
 
-        }*/
+        }
 
 
     }

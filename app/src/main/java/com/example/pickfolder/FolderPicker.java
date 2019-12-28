@@ -28,15 +28,10 @@ public class FolderPicker extends Activity {
     ArrayList<FilePojo> foldersList;
     ArrayList<FilePojo> filesList;
 
-    Context context;
-
     TextView tv_title;
     TextView tv_location;
 
     String location = Environment.getExternalStorageDirectory().getAbsolutePath();
-   //File file = getExternalFilesDir(Environment.DIRECTORY_DCIM);
-    //String location = file.toString();
-    //String location = context.getExternalFilesDir(null).getAbsolutePath();
     boolean pickFiles;
     Intent receivedIntent;
 
